@@ -23,19 +23,19 @@ CREATE TABLE alerte(
 CREATE TABLE carburant(
         id_carburant      int (11) Auto_increment  NOT NULL ,
         libelle_carburant Varchar (25) ,
-        prix_carburant    Float ,
+        prix_carburant    Decimal (2,3) ,
         PRIMARY KEY (id_carburant )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: categorie_vehicule
+# Table: categorie_composant_vehicule
 #------------------------------------------------------------
 
-CREATE TABLE categorie_vehicule(
-        id_categorie_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_categorie_vehicule Varchar (25) ,
-        PRIMARY KEY (id_categorie_vehicule )
+CREATE TABLE categorie_composant_vehicule(
+        id_categorie_composant_vehicule      int (11) Auto_increment  NOT NULL ,
+        libelle_categorie_composant_vehicule Varchar (100) ,
+        PRIMARY KEY (id_categorie_composant_vehicule )
 )ENGINE=InnoDB;
 
 
@@ -44,9 +44,9 @@ CREATE TABLE categorie_vehicule(
 #------------------------------------------------------------
 
 CREATE TABLE composant_vehicule(
-        id_composant_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_composant_vehicule Varchar (25) ,
-        id_sous_categorie_vehicule Int ,
+        id_composant_vehicule                int (11) Auto_increment  NOT NULL ,
+        libelle_composant_vehicule           Varchar (25) ,
+        id_sous_categorie_composant_vehicule Int ,
         PRIMARY KEY (id_composant_vehicule )
 )ENGINE=InnoDB;
 
@@ -75,14 +75,14 @@ CREATE TABLE modele_vehicule(
 
 
 #------------------------------------------------------------
-# Table: sous_categorie_vehicule
+# Table: sous_categorie_composant_vehicule
 #------------------------------------------------------------
 
-CREATE TABLE sous_categorie_vehicule(
-        id_sous_categorie_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_sous_categorie_vehicule Varchar (25) ,
-        id_categorie_vehicule           Int ,
-        PRIMARY KEY (id_sous_categorie_vehicule )
+CREATE TABLE sous_categorie_composant_vehicule(
+        id_sous_categorie_composant_vehicule      int (11) Auto_increment  NOT NULL ,
+        libelle_sous_categorie_composant_vehicule Varchar (100) ,
+        id_categorie_composant_vehicule           Int ,
+        PRIMARY KEY (id_sous_categorie_composant_vehicule )
 )ENGINE=InnoDB;
 
 
@@ -229,9 +229,9 @@ CREATE TABLE utilise(
 )ENGINE=InnoDB;
 
 ALTER TABLE alerte ADD CONSTRAINT FK_alerte_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
-ALTER TABLE composant_vehicule ADD CONSTRAINT FK_composant_vehicule_id_sous_categorie_vehicule FOREIGN KEY (id_sous_categorie_vehicule) REFERENCES sous_categorie_vehicule(id_sous_categorie_vehicule);
+ALTER TABLE composant_vehicule ADD CONSTRAINT FK_composant_vehicule_id_sous_categorie_composant_vehicule FOREIGN KEY (id_sous_categorie_composant_vehicule) REFERENCES sous_categorie_composant_vehicule(id_sous_categorie_composant_vehicule);
 ALTER TABLE modele_vehicule ADD CONSTRAINT FK_modele_vehicule_id_marque_vehicule FOREIGN KEY (id_marque_vehicule) REFERENCES marque_vehicule(id_marque_vehicule);
-ALTER TABLE sous_categorie_vehicule ADD CONSTRAINT FK_sous_categorie_vehicule_id_categorie_vehicule FOREIGN KEY (id_categorie_vehicule) REFERENCES categorie_vehicule(id_categorie_vehicule);
+ALTER TABLE sous_categorie_composant_vehicule ADD CONSTRAINT FK_sous_categorie_composant_vehicule_id_categorie_composant_vehicule FOREIGN KEY (id_categorie_composant_vehicule) REFERENCES categorie_composant_vehicule(id_categorie_composant_vehicule);
 ALTER TABLE type_pneu ADD CONSTRAINT FK_type_pneu_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
 ALTER TABLE type_pneu ADD CONSTRAINT FK_type_pneu_id_vitesse_pneu FOREIGN KEY (id_vitesse_pneu) REFERENCES vitesse_pneu(id_vitesse_pneu);
 ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_modele_vehicule FOREIGN KEY (id_modele_vehicule) REFERENCES modele_vehicule(id_modele_vehicule);
