@@ -283,10 +283,10 @@ CREATE TABLE compasant_vehicule(
 
 
 #------------------------------------------------------------
-# Table: relation0
+# Table: vehicule_utilisateur
 #------------------------------------------------------------
 
-CREATE TABLE relation0(
+CREATE TABLE vehicule_utilisateur(
         id_utilisateur Int NOT NULL ,
         id             Int NOT NULL ,
         PRIMARY KEY (id_utilisateur ,id )
@@ -328,7 +328,7 @@ ALTER TABLE niveau ADD CONSTRAINT FK_niveau_id_intervention FOREIGN KEY (id_inte
 ALTER TABLE niveau ADD CONSTRAINT FK_niveau_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
 ALTER TABLE compasant_vehicule ADD CONSTRAINT FK_compasant_vehicule_id FOREIGN KEY (id) REFERENCES composant(id);
 ALTER TABLE compasant_vehicule ADD CONSTRAINT FK_compasant_vehicule_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id);
-ALTER TABLE relation0 ADD CONSTRAINT FK_relation0_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
-ALTER TABLE relation0 ADD CONSTRAINT FK_relation0_id FOREIGN KEY (id) REFERENCES vehicule(id);
+ALTER TABLE vehicule_utilisateur ADD CONSTRAINT FK_vehicule_utilisateur_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
+ALTER TABLE vehicule_utilisateur ADD CONSTRAINT FK_vehicule_utilisateur_id FOREIGN KEY (id) REFERENCES vehicule(id);
 ALTER TABLE droit_groupe ADD CONSTRAINT FK_droit_groupe_id FOREIGN KEY (id) REFERENCES droit(id);
 ALTER TABLE droit_groupe ADD CONSTRAINT FK_droit_groupe_id_groupe FOREIGN KEY (id_groupe) REFERENCES groupe(id);
