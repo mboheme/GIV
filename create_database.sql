@@ -8,11 +8,14 @@
 #------------------------------------------------------------
 
 CREATE TABLE alerte(
-        id_alerte         int (11) Auto_increment  NOT NULL ,
-        date_alerte       Date ,
-        descriptif_alerte Varchar (500) ,
-        id_vehicule       Int ,
-        PRIMARY KEY (id_alerte )
+        id             int (11) Auto_increment  NOT NULL ,
+        name           Varchar (250) ,
+        password       Char (250) ,
+        date           Date ,
+        description    Varchar (500) ,
+        id_vehicule    Int ,
+        id_utilisateur Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
@@ -21,102 +24,91 @@ CREATE TABLE alerte(
 #------------------------------------------------------------
 
 CREATE TABLE carburant(
-        id_carburant      int (11) Auto_increment  NOT NULL ,
-        libelle_carburant Varchar (25) ,
-        prix_carburant    Decimal (2,3) ,
-        PRIMARY KEY (id_carburant )
+        id    int (11) Auto_increment  NOT NULL ,
+        name  Varchar (25) ,
+        value Decimal (2,3) ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: categorie_composant_vehicule
+# Table: categorie
 #------------------------------------------------------------
 
-CREATE TABLE categorie_composant_vehicule(
-        id_categorie_composant_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_categorie_composant_vehicule Varchar (100) ,
-        PRIMARY KEY (id_categorie_composant_vehicule )
+CREATE TABLE categorie(
+        id   int (11) Auto_increment  NOT NULL ,
+        name Varchar (100) ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: composant_vehicule
+# Table: composant
 #------------------------------------------------------------
 
-CREATE TABLE composant_vehicule(
-        id_composant_vehicule                int (11) Auto_increment  NOT NULL ,
-        libelle_composant_vehicule           Varchar (25) ,
-        id_sous_categorie_composant_vehicule Int ,
-        PRIMARY KEY (id_composant_vehicule )
+CREATE TABLE composant(
+        id               int (11) Auto_increment  NOT NULL ,
+        name             Varchar (100) ,
+        id_souscategorie Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: marque_vehicule
+# Table: marque
 #------------------------------------------------------------
 
-CREATE TABLE marque_vehicule(
-        id_marque_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_marque_vehicule Varchar (25) ,
-        PRIMARY KEY (id_marque_vehicule )
+CREATE TABLE marque(
+        id   int (11) Auto_increment  NOT NULL ,
+        name Varchar (100) ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: modele_vehicule
+# Table: modele
 #------------------------------------------------------------
 
-CREATE TABLE modele_vehicule(
-        id_modele_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_modele_vehicule Varchar (25) ,
-        id_marque_vehicule      Int ,
-        PRIMARY KEY (id_modele_vehicule )
+CREATE TABLE modele(
+        id        int (11) Auto_increment  NOT NULL ,
+        name      Varchar (100) ,
+        id_marque Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: sous_categorie_composant_vehicule
+# Table: souscategorie
 #------------------------------------------------------------
 
-CREATE TABLE sous_categorie_composant_vehicule(
-        id_sous_categorie_composant_vehicule      int (11) Auto_increment  NOT NULL ,
-        libelle_sous_categorie_composant_vehicule Varchar (100) ,
-        id_categorie_composant_vehicule           Int ,
-        PRIMARY KEY (id_sous_categorie_composant_vehicule )
+CREATE TABLE souscategorie(
+        id           int (11) Auto_increment  NOT NULL ,
+        name         Varchar (100) ,
+        id_categorie Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: type_intervention
+# Table: pneu
 #------------------------------------------------------------
 
-CREATE TABLE type_intervention(
-        id_type_intervention      int (11) Auto_increment  NOT NULL ,
-        libelle_type_intervention Varchar (25) ,
-        PRIMARY KEY (id_type_intervention )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: type_pneu
-#------------------------------------------------------------
-
-CREATE TABLE type_pneu(
-        id_type_pneu              int (11) Auto_increment  NOT NULL ,
-        libelle_type_pneu         Varchar (30) ,
-        hiver_type_pneu           Bool ,
-        type_type_pneu            Varchar (6) ,
-        largeur_type_pneu         Int ,
-        hauteur_largeur_type_pneu Int ,
-        contruction_type_pneu     Varchar (6) ,
-        diametre_roue_type_pneu   Int ,
-        indice_charge_type_pneu   Int ,
-        indiice_vitesse_type_pneu Int ,
-        min_hiver_type_pneu       Int ,
-        min_ete_type_pneu         Int ,
-        id_vehicule               Int ,
-        id_vitesse_pneu           Int ,
-        PRIMARY KEY (id_type_pneu )
+CREATE TABLE pneu(
+        id              int (11) Auto_increment  NOT NULL ,
+        name            Varchar (30) ,
+        hiver           Bool ,
+        type            Varchar (6) ,
+        largeur         Int ,
+        hauteur         Int ,
+        contruction     Varchar (6) ,
+        diametre_roue   Int ,
+        indice_charge   Int ,
+        indiice_vitesse Int ,
+        min_hiver       Int ,
+        min_ete         Int ,
+        id_composant    Int ,
+        id_vitesse      Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
@@ -125,46 +117,29 @@ CREATE TABLE type_pneu(
 #------------------------------------------------------------
 
 CREATE TABLE vehicule(
-        id_vehicule                             int (11) Auto_increment  NOT NULL ,
-        plaque_vehicule                         Varchar (25) ,
-        litre_cent_vehicule                     Float ,
-        km_vehicule                             Int ,
-        serrage_ecrou_alu_vehicule              Decimal (3,1) ,
-        serrage_ecrou_tole_vehicule             Decimal (3,1) ,
-        pression_pneu_av_droit_vehicule         Decimal (3,1) ,
-        pression_pneu_av_gauche_vehicule        Decimal (3,1) ,
-        pression_pneu_ar_droit_vehicule         Decimal (3,1) ,
-        pression_pneu_ar_gauche_vehicule        Decimal (3,1) ,
-        epaisseur_p_frein_av_droit_vehicule     Decimal (3,1) ,
-        epaisseur_p_frein_av_gauche_vehicule    Decimal (3,1) ,
-        epaisseur_p_frein_ar_droit_vehicule     Decimal (3,1) ,
-        epaisseur_p_frein_ar_gauche_vehicule    Decimal (3,1) ,
-        taille_plaquette_frein_vehicule         Decimal (3,1) ,
-        pression_freins_vehicule                Decimal (3,1) ,
-        usure_pneu_vehicule                     Decimal (3,1) ,
-        niveau_huile_vehicule                   Decimal (3,1) ,
-        niveau_liquide_refroidissement_vehicule Decimal (3,1) ,
-        niveau_frein_vehicule                   Decimal (3,1) ,
-        carte_grise_vehicule                    Varchar (250) ,
-        photo_vehicule                          Varchar (250) ,
-        date_circulation_vehicule               Date ,
-        usure_pneu_hiver_vehicule               Int ,
-        usure_pneu_ete_vehicule                 Int ,
-        id_modele_vehicule                      Int ,
-        id_carburant                            Int ,
-        PRIMARY KEY (id_vehicule )
+        id           int (11) Auto_increment  NOT NULL ,
+        name         Varchar (250) ,
+        plaque       Varchar (25) ,
+        litre_cent   Decimal (2,1) ,
+        kilometre    Int ,
+        carte_grise  Varchar (250) ,
+        photo        Varchar (250) ,
+        date         Date ,
+        id_modele    Int ,
+        id_carburant Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: vitesse_pneu
+# Table: vitesse
 #------------------------------------------------------------
 
-CREATE TABLE vitesse_pneu(
-        id_vitesse_pneu      int (11) Auto_increment  NOT NULL ,
-        libelle_vitesse_pneu Varchar (25) ,
-        kmh_vitesse_pneu     Int ,
-        PRIMARY KEY (id_vitesse_pneu )
+CREATE TABLE vitesse(
+        id              int (11) Auto_increment  NOT NULL ,
+        name            Varchar (25) ,
+        kilometre_heure Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
@@ -173,38 +148,14 @@ CREATE TABLE vitesse_pneu(
 #------------------------------------------------------------
 
 CREATE TABLE intervention(
-        id_intervention                             int (11) Auto_increment  NOT NULL ,
-        km_vehicule                                 Int NOT NULL ,
-        serrage_ecrou_alu_intervention              Decimal (3,1) NOT NULL ,
-        serrage_ecrou_tole_intervention             Decimal (3,1) NOT NULL ,
-        pression_pneu_av_droit_intervention         Decimal (3,1) NOT NULL ,
-        pression_pneu_av_gauche_intervention        Decimal (3,1) NOT NULL ,
-        pression_pneu_ar_droit_intervention         Decimal (3,1) NOT NULL ,
-        pression_pneu_ar_gauche_intervention        Decimal (3,1) NOT NULL ,
-        epaisseur_p_frein_av_droit_intervention     Decimal (3,1) NOT NULL ,
-        epaisseur_p_frein_av_gauche_intervention    Decimal (3,1) NOT NULL ,
-        epaisseur_p_frein_ar_droit_intervention     Decimal (3,1) NOT NULL ,
-        epaisseur_p_frein_ar_gauche_intervention    Decimal (3,1) NOT NULL ,
-        taille_plaquette_frein_intervention         Decimal (3,1) NOT NULL ,
-        pression_freins_intervention                Decimal (3,1) NOT NULL ,
-        usure_pneu_intervention                     Decimal (3,1) NOT NULL ,
-        niveau_huile_intervention                   Decimal (3,1) NOT NULL ,
-        niveau_liquide_refroidissement_intervention Decimal (3,1) NOT NULL ,
-        niveau_frein_intervention                   Decimal (3,1) NOT NULL ,
-        etat_es_glace_intervention                  Varchar (30) ,
-        description_intervention                    Varchar (500) ,
-        usure_pneu_av_droit_intervention            Int ,
-        usure_pneu_av_gauche_intervention           Int ,
-        usure_pneu_ar_droit_intervention            Int ,
-        usure_pneu_ar_gauche_intervention           Int ,
-        cout_intervention                           Decimal (9,2) ,
-        devis_intervention                          Varchar (50) ,
-        facture_intervention                        Varchar (50) ,
-        id_vehicule                                 Int ,
-        id_type_intervention                        Int ,
-        id_composant_vehicule                       Int ,
-        id_utilisateur                              Int ,
-        PRIMARY KEY (id_intervention )
+        id             int (11) Auto_increment  NOT NULL ,
+        kilometre      Int NOT NULL ,
+        description    Varchar (500) ,
+        cout           Decimal (9,2) ,
+        devis          Varchar (50) ,
+        facture        Varchar (50) ,
+        id_utilisateur Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
@@ -214,31 +165,170 @@ CREATE TABLE intervention(
 
 CREATE TABLE utilisateur(
         id_utilisateur int (11) Auto_increment  NOT NULL ,
+        name           Varchar (250) ,
+        function       Varchar (250) ,
+        id             Int ,
         PRIMARY KEY (id_utilisateur )
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: utilise
+# Table: serrage
 #------------------------------------------------------------
 
-CREATE TABLE utilise(
-        id_composant_vehicule Int NOT NULL ,
-        id_vehicule           Int NOT NULL ,
-        PRIMARY KEY (id_composant_vehicule ,id_vehicule )
+CREATE TABLE serrage(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
-ALTER TABLE alerte ADD CONSTRAINT FK_alerte_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
-ALTER TABLE composant_vehicule ADD CONSTRAINT FK_composant_vehicule_id_sous_categorie_composant_vehicule FOREIGN KEY (id_sous_categorie_composant_vehicule) REFERENCES sous_categorie_composant_vehicule(id_sous_categorie_composant_vehicule);
-ALTER TABLE modele_vehicule ADD CONSTRAINT FK_modele_vehicule_id_marque_vehicule FOREIGN KEY (id_marque_vehicule) REFERENCES marque_vehicule(id_marque_vehicule);
-ALTER TABLE sous_categorie_composant_vehicule ADD CONSTRAINT FK_sous_categorie_composant_vehicule_id_categorie_composant_vehicule FOREIGN KEY (id_categorie_composant_vehicule) REFERENCES categorie_composant_vehicule(id_categorie_composant_vehicule);
-ALTER TABLE type_pneu ADD CONSTRAINT FK_type_pneu_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
-ALTER TABLE type_pneu ADD CONSTRAINT FK_type_pneu_id_vitesse_pneu FOREIGN KEY (id_vitesse_pneu) REFERENCES vitesse_pneu(id_vitesse_pneu);
-ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_modele_vehicule FOREIGN KEY (id_modele_vehicule) REFERENCES modele_vehicule(id_modele_vehicule);
-ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_carburant FOREIGN KEY (id_carburant) REFERENCES carburant(id_carburant);
-ALTER TABLE intervention ADD CONSTRAINT FK_intervention_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
-ALTER TABLE intervention ADD CONSTRAINT FK_intervention_id_type_intervention FOREIGN KEY (id_type_intervention) REFERENCES type_intervention(id_type_intervention);
-ALTER TABLE intervention ADD CONSTRAINT FK_intervention_id_composant_vehicule FOREIGN KEY (id_composant_vehicule) REFERENCES composant_vehicule(id_composant_vehicule);
+
+#------------------------------------------------------------
+# Table: pression
+#------------------------------------------------------------
+
+CREATE TABLE pression(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: epaisseur
+#------------------------------------------------------------
+
+CREATE TABLE epaisseur(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: usure
+#------------------------------------------------------------
+
+CREATE TABLE usure(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: etat
+#------------------------------------------------------------
+
+CREATE TABLE etat(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: niveau
+#------------------------------------------------------------
+
+CREATE TABLE niveau(
+        id              int (11) Auto_increment  NOT NULL ,
+        value           Decimal (5,3) ,
+        id_intervention Int ,
+        id_composant    Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: groupe
+#------------------------------------------------------------
+
+CREATE TABLE groupe(
+        id   int (11) Auto_increment  NOT NULL ,
+        name Varchar (250) ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: droit
+#------------------------------------------------------------
+
+CREATE TABLE droit(
+        id int (11) Auto_increment  NOT NULL ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: compasant_vehicule
+#------------------------------------------------------------
+
+CREATE TABLE compasant_vehicule(
+        id          Int NOT NULL ,
+        id_vehicule Int NOT NULL ,
+        PRIMARY KEY (id ,id_vehicule )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: relation0
+#------------------------------------------------------------
+
+CREATE TABLE relation0(
+        id_utilisateur Int NOT NULL ,
+        id             Int NOT NULL ,
+        PRIMARY KEY (id_utilisateur ,id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: droit_groupe
+#------------------------------------------------------------
+
+CREATE TABLE droit_groupe(
+        id        Int NOT NULL ,
+        id_groupe Int NOT NULL ,
+        PRIMARY KEY (id ,id_groupe )
+)ENGINE=InnoDB;
+
+ALTER TABLE alerte ADD CONSTRAINT FK_alerte_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id);
+ALTER TABLE alerte ADD CONSTRAINT FK_alerte_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
+ALTER TABLE composant ADD CONSTRAINT FK_composant_id_souscategorie FOREIGN KEY (id_souscategorie) REFERENCES souscategorie(id);
+ALTER TABLE modele ADD CONSTRAINT FK_modele_id_marque FOREIGN KEY (id_marque) REFERENCES marque(id);
+ALTER TABLE souscategorie ADD CONSTRAINT FK_souscategorie_id_categorie FOREIGN KEY (id_categorie) REFERENCES categorie(id);
+ALTER TABLE pneu ADD CONSTRAINT FK_pneu_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE pneu ADD CONSTRAINT FK_pneu_id_vitesse FOREIGN KEY (id_vitesse) REFERENCES vitesse(id);
+ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_modele FOREIGN KEY (id_modele) REFERENCES modele(id);
+ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_carburant FOREIGN KEY (id_carburant) REFERENCES carburant(id);
 ALTER TABLE intervention ADD CONSTRAINT FK_intervention_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
-ALTER TABLE utilise ADD CONSTRAINT FK_utilise_id_composant_vehicule FOREIGN KEY (id_composant_vehicule) REFERENCES composant_vehicule(id_composant_vehicule);
-ALTER TABLE utilise ADD CONSTRAINT FK_utilise_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule);
+ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id FOREIGN KEY (id) REFERENCES groupe(id);
+ALTER TABLE serrage ADD CONSTRAINT FK_serrage_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE serrage ADD CONSTRAINT FK_serrage_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE pression ADD CONSTRAINT FK_pression_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE pression ADD CONSTRAINT FK_pression_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE epaisseur ADD CONSTRAINT FK_epaisseur_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE epaisseur ADD CONSTRAINT FK_epaisseur_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE usure ADD CONSTRAINT FK_usure_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE usure ADD CONSTRAINT FK_usure_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE etat ADD CONSTRAINT FK_etat_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE etat ADD CONSTRAINT FK_etat_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE niveau ADD CONSTRAINT FK_niveau_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
+ALTER TABLE niveau ADD CONSTRAINT FK_niveau_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
+ALTER TABLE compasant_vehicule ADD CONSTRAINT FK_compasant_vehicule_id FOREIGN KEY (id) REFERENCES composant(id);
+ALTER TABLE compasant_vehicule ADD CONSTRAINT FK_compasant_vehicule_id_vehicule FOREIGN KEY (id_vehicule) REFERENCES vehicule(id);
+ALTER TABLE relation0 ADD CONSTRAINT FK_relation0_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
+ALTER TABLE relation0 ADD CONSTRAINT FK_relation0_id FOREIGN KEY (id) REFERENCES vehicule(id);
+ALTER TABLE droit_groupe ADD CONSTRAINT FK_droit_groupe_id FOREIGN KEY (id) REFERENCES droit(id);
+ALTER TABLE droit_groupe ADD CONSTRAINT FK_droit_groupe_id_groupe FOREIGN KEY (id_groupe) REFERENCES groupe(id);
