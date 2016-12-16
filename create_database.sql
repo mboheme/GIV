@@ -26,7 +26,7 @@ CREATE TABLE alerte(
 CREATE TABLE carburant(
         id    int (11) Auto_increment  NOT NULL ,
         name  Varchar (25) ,
-        value Decimal (2,3) ,
+        value Decimal (5,3) ,
         PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
