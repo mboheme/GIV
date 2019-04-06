@@ -169,6 +169,7 @@ CREATE TABLE utilisateur(
         password       Varchar (500) ,
         name           Varchar (250) ,
         function       Varchar (250) ,
+        id_groupe      Int ,
         PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
@@ -314,7 +315,7 @@ ALTER TABLE pneu ADD CONSTRAINT FK_pneu_id_vitesse FOREIGN KEY (id_vitesse) REFE
 ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_modele FOREIGN KEY (id_modele) REFERENCES modele(id);
 ALTER TABLE vehicule ADD CONSTRAINT FK_vehicule_id_carburant FOREIGN KEY (id_carburant) REFERENCES carburant(id);
 ALTER TABLE intervention ADD CONSTRAINT FK_intervention_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id);
-ALTER TABLE utilisateur ADD CONSTRAINT FK_id FOREIGN KEY (id) REFERENCES groupe(id);
+ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id_groupe FOREIGN KEY (id_groupe) REFERENCES groupe(id);
 ALTER TABLE serrage ADD CONSTRAINT FK_serrage_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
 ALTER TABLE serrage ADD CONSTRAINT FK_serrage_id_composant FOREIGN KEY (id_composant) REFERENCES composant(id);
 ALTER TABLE pression ADD CONSTRAINT FK_pression_id_intervention FOREIGN KEY (id_intervention) REFERENCES intervention(id);
