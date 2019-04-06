@@ -169,7 +169,7 @@ CREATE TABLE utilisateur(
         password       Varchar (500) ,
         name           Varchar (250) ,
         function       Varchar (250) ,
-        PRIMARY KEY (id_utilisateur )
+        PRIMARY KEY (id )
 )ENGINE=InnoDB;
 
 
