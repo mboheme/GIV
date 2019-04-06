@@ -164,7 +164,9 @@ CREATE TABLE intervention(
 #------------------------------------------------------------
 
 CREATE TABLE utilisateur(
-        id_utilisateur int (11) Auto_increment  NOT NULL ,
+        id int (11) Auto_increment  NOT NULL ,
+        email          Varchar (100) ,
+        password       Varchar (500) ,
         name           Varchar (250) ,
         function       Varchar (250) ,
         id             Int ,
