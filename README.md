@@ -1,5 +1,5 @@
 # GIV
-Gestionnaire d'Intervention sur Véhicules - GIV
+Gestionnaire d'Interventions sur Véhicules - GIV
 
 Objectifs : 
 - Gérer (modifier, supprimer et ajouter) : 
@@ -11,6 +11,3 @@ Objectifs :
 		- par véhicules
 		- par composants
 	- des utilisateurs
-		
-
-
